@@ -1,0 +1,5 @@
+# env file with tokens and sensitive data
+.env
+
+# python cache folder
+__pycache__/
