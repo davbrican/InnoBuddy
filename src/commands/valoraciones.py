@@ -22,7 +22,7 @@ def responder_valoraciones(update, context):
     update.callback_query.answer()
     
     lista=[]
-    fileobj=open("./valoraciones.txt", "r+")
+    fileobj=open("./InnoBuddy/src/valoraciones.txt", "r+")
     for line in fileobj.readlines():
         line = line.replace("\n", "")
         lista.append(line)
@@ -36,7 +36,7 @@ def responder_valoraciones(update, context):
         print("LIKE")
     
     
-    fileobj=open("./valoraciones.txt", "w")
+    fileobj=open("./InnoBuddy/src/valoraciones.txt", "w")
     newTxt = ""
     for i in lista:
         newTxt += i + "\n"
