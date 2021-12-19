@@ -8,9 +8,6 @@ from telegram import *
 
 
 def valoraciones(update, context):
-    """
-        Shows an welcome message and help info about the available commands.
-    """
     me = context.bot.get_me()
 
     # Welcome message
@@ -31,8 +28,6 @@ def responder_valoraciones(update, context):
         lista.append(line)
     fileobj.close()
 
-    print(lista)
-
     if "dislike" in query:
         lista.append("dislike")
         print("DISLIKE")
@@ -47,5 +42,3 @@ def responder_valoraciones(update, context):
         newTxt += i + "\n"
     fileobj.write(newTxt)
     fileobj.close()
-
-    #context.bot.deleteMessage(chat_id=update.message.chat_id, message_id=update.message.message_id)
