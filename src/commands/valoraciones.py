@@ -21,24 +21,16 @@ def responder_valoraciones(update, context):
     query = update.callback_query.data    
     update.callback_query.answer()
     
-    lista=[]
-    fileobj=open("./InnoBuddy/src/valoraciones.txt", "r+")
-    for line in fileobj.readlines():
-        line = line.replace("\n", "")
-        lista.append(line)
-    fileobj.close()
+    with open(os.path.dirname(__file__) + "/valoraciones.json", "r", encoding="UTF-8") as file:
+        data = json.load(file)
 
     if "dislike" in query:
-        lista.append("dislike")
+        data["dislikes"] += 1
         print("DISLIKE")
     elif "like" in query:
-        lista.append("like")
+        data["likes"] += 1
         print("LIKE")
     
     
-    fileobj=open("./InnoBuddy/src/valoraciones.txt", "w")
-    newTxt = ""
-    for i in lista:
-        newTxt += i + "\n"
-    fileobj.write(newTxt)
-    fileobj.close()
+    with open(os.path.dirname(__file__) + "/valoraciones.json", "w", encoding="UTF-8") as file:
+        json.dump(data, file)
