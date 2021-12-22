@@ -5,3 +5,4 @@ pytest
 telethon
 beautifulsoup4
 markdown
+mysql-connector-python
