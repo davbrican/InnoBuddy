@@ -2,21 +2,22 @@ import pytest
 import asyncio
 from pytest import mark
 import os
+from dotenv import load_dotenv
 import json
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.custom.message import Message
 import markdown
 from bs4 import BeautifulSoup
-
+load_dotenv()
 def markdown_to_text(st):
     html = markdown.markdown(st)
     return "".join(BeautifulSoup(html).findAll(text=True))
     
 
-api_id = int(os.environ["TELEGRAM_APP_ID"])
-api_hash = os.environ["TELEGRAM_APP_HASH"]
-session_str = os.environ["TELETHON_SESSION"]
+api_id = int(os.getenv("TELEGRAM_APP_ID"))
+api_hash = os.getenv("TELEGRAM_APP_HASH")
+session_str = os.getenv("TELETHON_SESSION")
 
 testbot_name = "@innobuddy_bot"
 
