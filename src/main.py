@@ -2,10 +2,9 @@ import os
 from telegram.ext import Updater, CallbackContext
 from dotenv import load_dotenv
 from handlers import setUpHandlers
+load_dotenv()
 
-def main():
-	load_dotenv()
-	TOKEN=os.getenv('TOKEN')
+def main(TOKEN):
 	updater=Updater(TOKEN, use_context=True)
 	bot=updater.dispatcher
 
@@ -16,4 +15,5 @@ def main():
 	updater.idle()
 
 if __name__ == '__main__':
-	main()
+	main(os.getenv('TOKEN'))
+	
