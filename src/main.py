@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 from telegram.ext import Updater, CallbackContext
 from dotenv import load_dotenv
