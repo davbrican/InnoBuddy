@@ -31,6 +31,7 @@ def create_users(conn):
     cursor.execute('''INSERT usuarios(id,rol) VALUES(207767757,"admin")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(267547511,"alumno")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(686981968,"alumno")''')
+    cursor.execute('''INSERT valoraciones(id,positivas,negativas) VALUES(0,0,0)''')
     conn.commit()
 
 if __name__ == '__main__':
