@@ -1,0 +1,12 @@
+{
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "src"
+    ],
+    "python.analysis.extraPaths": [
+        "./src/db",
+        "./src/repositories",
+        "./src/services"
+    ],
+}
