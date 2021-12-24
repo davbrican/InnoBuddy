@@ -4,4 +4,9 @@
     "python.testing.pytestArgs": [
         "src"
     ],
+    "python.analysis.extraPaths": [
+        "./src/db",
+        "./src/repositories",
+        "./src/services"
+    ],
 }
