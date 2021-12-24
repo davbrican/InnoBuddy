@@ -11,6 +11,7 @@ def main(TOKEN):
 	updater=Updater(TOKEN, use_context=True)
 	bot=updater.dispatcher
 	bot_command = Bot(token=TOKEN)
+
 	# EVENTS
 	setUpHandlers(bot)
 	settingCommands(bot_command)

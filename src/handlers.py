@@ -21,6 +21,7 @@ def setUpHandlers(bot):
     bot.add_handler(CallbackQueryHandler(responder_valoraciones))
     bot.add_handler(CommandHandler('fechas', fechas))
     bot.add_handler(CommandHandler('socialmedias', socialmedias))
+    bot.add_handler(CommandHandler('admin', admin))
     
 def settingCommands(bot):
     command = [
@@ -30,4 +31,3 @@ def settingCommands(bot):
    ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
-    bot.add_handler(CommandHandler('admin', admin))
