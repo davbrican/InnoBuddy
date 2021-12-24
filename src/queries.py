@@ -25,7 +25,7 @@ def queries(update, context):
     keyboard = [[]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     query.edit_message_text(
-        text="¡Muchas gracias por utilizar InnoBuddy!", reply_markup=reply_markup
+        text="¡Muchas gracias por tu valoración!", reply_markup=reply_markup
     )
     
     cursor.execute(str_update)

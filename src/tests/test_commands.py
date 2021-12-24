@@ -75,17 +75,6 @@ async def test_evidencias_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         print(resp.raw_text)
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
-
-@mark.asyncio
-async def test_valoraciones(client: TelegramClient):
-    async with client.conversation(testbot_name, timeout=10) as conv:
-        await conv.send_message("/evidencias")
-        markup = client.build_reply_markup(Button.inline('Si👍', 'No👎'))
-        await conv.send_message('Si👍', buttons=markup)
-        resp: Message = await conv.get_response()
-        print(resp.raw_text)
         resp2: Message = await conv.get_response()
         print(resp2.raw_text)
-        #client.add_event_handler(handler, events.NewMessage)
         assert markdown_to_text("¿He resuelto tu consulta?") in resp2.raw_text
-        
