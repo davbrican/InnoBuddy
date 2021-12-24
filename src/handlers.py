@@ -6,6 +6,7 @@ from commands.evidencias import evidencias
 from commands.valoraciones import responder_valoraciones
 from commands.fechas import fechas
 from commands.socialMedias import socialmedias
+from commands.admin import admin
 
 from telegram.ext import CommandHandler
 from telegram.ext import CallbackQueryHandler
@@ -29,3 +30,4 @@ def settingCommands(bot):
    ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
+    bot.add_handler(CommandHandler('admin', admin))
