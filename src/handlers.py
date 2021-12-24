@@ -5,6 +5,7 @@ from commands.start import start
 from commands.evidencias import evidencias
 from commands.valoraciones import responder_valoraciones
 from commands.fechas import fechas
+from commands.help import help
 from commands.socialMedias import socialmedias
 from commands.admin import admin
 
@@ -20,6 +21,7 @@ def setUpHandlers(bot):
     bot.add_handler(CommandHandler('evidencias', evidencias))
     bot.add_handler(CallbackQueryHandler(responder_valoraciones))
     bot.add_handler(CommandHandler('fechas', fechas))
+    bot.add_handler(CommandHandler('help', help))
     bot.add_handler(CommandHandler('socialmedias', socialmedias))
     bot.add_handler(CommandHandler('admin', admin))
     
@@ -28,6 +30,6 @@ def settingCommands(bot):
       BotCommand(command='/socialmedias', description= 'Ver nuestras redes sociales'),
       BotCommand(command='/evidencias', description ='Información acerca de las evidencias'),
       BotCommand(command='/fechas', description='Enterate de las fechas de las charlas y eventos')
-   ]
+    ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
