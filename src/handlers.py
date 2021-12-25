@@ -8,6 +8,7 @@ from commands.fechas import fechas
 from commands.help import help
 from commands.socialMedias import socialmedias
 from commands.admin import admin
+from commands.eventos import eventos
 
 from telegram.ext import CommandHandler
 from telegram.ext import CallbackQueryHandler
@@ -24,12 +25,13 @@ def setUpHandlers(bot):
     bot.add_handler(CommandHandler('help', help))
     bot.add_handler(CommandHandler('socialmedias', socialmedias))
     bot.add_handler(CommandHandler('admin', admin))
+    bot.add_handler(CommandHandler('eventos', eventos))
     
 def settingCommands(bot):
     command = [
-      BotCommand(command='/socialmedias', description= 'Ver nuestras redes sociales'),
-      BotCommand(command='/evidencias', description ='Información acerca de las evidencias'),
-      BotCommand(command='/fechas', description='Enterate de las fechas de las charlas y eventos')
+        BotCommand(command='/socialmedias', description= 'Ver nuestras redes sociales'),
+        BotCommand(command='/evidencias', description ='Información acerca de las evidencias'),
+        BotCommand(command='/fechas', description='Enterate de las fechas de las charlas y eventos')
     ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
