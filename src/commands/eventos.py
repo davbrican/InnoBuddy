@@ -14,6 +14,13 @@ def eventos(update, context):
     if len(context.args) == 0:
         eventos = events_service.find_all_events()
         context.bot.send_message(update.message.chat_id, readMessage('eventos'), parse_mode='MarkdownV2')
+    elif context.args[0] == 'hoy':
+        eventos = events_service.find_event_by_day_today()
+        if len(eventos) == 0:
+            context.bot.send_message(update.message.chat_id, readMessage('noHayEventosParaDiaX')+"de hoy", parse_mode='MarkdownV2')
+            return
+        else:
+            context.bot.send_message(update.message.chat_id, readMessage('eventosDiaX') + "de hoy", parse_mode='MarkdownV2')
     elif pattern.match(context.args[0]):
         dia = context.args[0]
         eventos = events_service.find_day_events(dia)

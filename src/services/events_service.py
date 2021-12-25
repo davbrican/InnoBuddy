@@ -10,3 +10,6 @@ def find_all_events():
 
 def find_day_events(dia):
     return events_repository.find_event_by_day(dia)
+
+def find_event_by_day_today():
+    return events_repository.find_event_by_day_today()
