@@ -73,3 +73,17 @@ async def test_evidencias_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         print(resp.raw_text)
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
+        
+@mark.asyncio
+async def test_redes_sociales_messages(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=10) as conv:
+        await conv.send_message("/socialmedias")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        comp1 = markdown_to_text(messages['socialmedias'])
+        resp: Message = await conv.get_response()
+        comp2 = resp.raw_text.replace("\n\n ","\n")
+        print(resp.raw_text)
+        assert comp1 in comp2
+
