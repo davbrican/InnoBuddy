@@ -2,6 +2,7 @@ import pytest
 import asyncio
 import inspect
 import sys
+import time
 from pytest import mark
 import os
 import multiprocessing
@@ -62,6 +63,22 @@ async def test_start_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['start']) in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(1.0)
+        
+
+@mark.asyncio
+async def test_redes_sociales_messages(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=10) as conv:
+        await conv.send_message("/socialmedias")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        comp1 = markdown_to_text(messages['socialmedias'])
+        resp: Message = await conv.get_response()
+        comp2 = resp.raw_text.replace("\n\n ","\n")
+        print('redes sociales:' + resp.raw_text)
+        assert comp1 in comp2
+        time.sleep(1.0)
        
 @mark.asyncio
 async def test_evidencias_message(client: TelegramClient):
@@ -73,17 +90,7 @@ async def test_evidencias_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         print(resp.raw_text)
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(1.0)
         
-@mark.asyncio
-async def test_redes_sociales_messages(client: TelegramClient):
-    async with client.conversation(testbot_name, timeout=10) as conv:
-        await conv.send_message("/socialmedias")
-        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
-        messages = json.load(f)
-        f.close()
-        comp1 = markdown_to_text(messages['socialmedias'])
-        resp: Message = await conv.get_response()
-        comp2 = resp.raw_text.replace("\n\n ","\n")
-        print(resp.raw_text)
-        assert comp1 in comp2
+
 
