@@ -47,6 +47,7 @@ def create_events(conn):
     cursor = conn.cursor()
     cursor.execute('''DELETE FROM eventos''')
     cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(232543201977,"Prueba","Aula A3.10\nSpeaker : Juanra", "2021-12-01T10:00:00", "2021-12-01T12:00:00")''')
+    cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(232521435544,"Prueba2","Aula B1.35\nSpeaker : Jesús", "2021-12-26T10:00:00", "2021-12-25T12:00:00")''')
     cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(204365020277,"Lo que nadie me contó durante la universidad","Aula A3.10\nSpeaker : Alberto Fernández", "2021-12-02T10:00:00", "2021-12-02T12:00:00")''')
     conn.commit()
 
