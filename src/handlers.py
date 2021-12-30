@@ -5,6 +5,7 @@ from commands.start import start
 from commands.evidencias import evidencias
 from queries import queries
 from commands.fechas import fechas
+from commands.localizacion import localizacion
 from commands.help import help
 from commands.socialMedias import socialmedias
 from commands.admin import admin
@@ -23,6 +24,7 @@ def setUpHandlers(bot):
     bot.add_handler(CommandHandler('start',	start))
     bot.add_handler(CommandHandler('evidencias', evidencias))
     bot.add_handler(CommandHandler('fechas', fechas))
+    bot.add_handler(CommandHandler('localizacion', localizacion))
     bot.add_handler(CommandHandler('help', help))
     bot.add_handler(CommandHandler('socialmedias', socialmedias))
     bot.add_handler(CommandHandler('admin', admin))

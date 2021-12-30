@@ -35,6 +35,15 @@ def create_tables(conn):
         )''')
     conn.commit()
 
+    cursor.execute('''DROP TABLE IF EXISTS localizaciones''')
+    cursor.execute('''CREATE TABLE localizaciones(
+        aula VARCHAR(25) NOT NULL,
+        ejex INT,
+        ejey INT,
+        PRIMARY KEY (aula)
+        )''')
+    conn.commit()
+
 def create_users(conn):
     cursor = conn.cursor()
     cursor.execute('''DELETE FROM usuarios''')
@@ -52,9 +61,25 @@ def create_events(conn):
     cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(204365020277,"Lo que nadie me contó durante la universidad","Aula A3.10\nSpeaker : Alberto Fernández", "2021-12-02T10:00:00", "2021-12-02T12:00:00")''')
     conn.commit()
 
+def create_localizaciones(conn):
+    cursor = conn.cursor()
+    cursor.execute('''DELETE FROM localizaciones''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A0.11", 386, 495)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A0.30", 344, 495)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A2.16", 213, 481)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A3.10", 398, 457)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A3.11", 298, 457)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("B1.34", 398, 365)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("B1.35", 418, 365)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("H0.12", 601, 441)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("H1.10", 524, 437)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("I2.35", 666, 583)''')
+    conn.commit()
+
 if __name__ == '__main__':
 
     conn = connect()
     create_tables(conn)
     create_users(conn)
+    create_localizaciones(conn)
     create_events(conn)

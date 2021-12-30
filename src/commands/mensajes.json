@@ -13,5 +13,9 @@
     "eventos" : "¡Estos son los eventos de las jornadas Innosoft\\! \n\n",
     "eventosDiaX" : "¡Estos son los eventos de las jornadas Innosoft del día ",
     "eventosDiaInvalido" : "La fecha introducida es incorrecta, debe seguir el siguiente formato: YYYY\\-MM\\-DD, tambien puedes introducir /eventos hoy, para saber los eventos del día de hoy",
-    "noHayEventosParaDiaX" : "No existen eventos para el día "
+    "noHayEventosParaDiaX" : "No existen eventos para el día ",
+    "ayuda_localizacion" : "El comando localizacion te ayudará a localizar aulasde la escuela, para ello utiliza '/localizacion aula \\<AULA\\>'\\.",
+    "ayuda_aula" : "Añade al comando el aula que quieras siguiendo el formato de la escuela, BloquePlanta\\.Número\\_aula, por ejemplo A1\\.16",
+    "aula_no_existe" : "El aula introducida no existe",
+    "parametro_no_existe" : "El parámetro introducido no existe\\."
 }
