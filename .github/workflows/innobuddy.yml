@@ -1,0 +1,60 @@
+name: tests
+
+on:
+  push:
+      branches: [ master, develop ]
+  pull_request:
+      branches: [ master, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Shutdown Ubuntu MySQL (SUDO)
+      run: sudo service mysql stop
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+    - name: Set up MySQL 5.7
+      id: set-up-mysql
+      uses: mirromutth/mysql-action@master
+      with:
+        mysql version: 5.7
+        mysql database: innobuddy
+        mysql user: test
+        mysql password: test
+    - name: Wait for set up
+      run:
+        sleep 10
+    - name: Executing populate database
+      env:
+      #configurationn
+        MYSQL_HOST: localhost
+        MYSQL_USER: test
+        MYSQL_PASS: test
+        MYSQL_DB: innobuddy
+      run: |
+        python src/db/populate.py
+    - name: Executing tests
+      env:
+        PRUEBAS_TOKEN: ${{ secrets.PRUEBAS_TOKEN }}
+        TELEGRAM_APP_ID: ${{ secrets.TELEGRAM_APP_ID }}
+        TELEGRAM_APP_HASH: ${{ secrets.TELEGRAM_APP_HASH }}
+        TELETHON_SESSION: ${{ secrets.TELETHON_SESSION }}
+        BOT_PRUEBAS: ${{ secrets.BOT_PRUEBAS }}
+        MYSQL_HOST: localhost
+        MYSQL_USER: test
+        MYSQL_PASS: test
+        MYSQL_DB: innobuddy
+      run: |
+        pytest ./src/tests/test_commands.py

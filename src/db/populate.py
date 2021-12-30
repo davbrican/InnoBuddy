@@ -23,6 +23,16 @@ def create_tables(conn):
         negativas INT,
         PRIMARY KEY (id)
         )''')
+    
+    cursor.execute('''DROP TABLE IF EXISTS eventos''')
+    cursor.execute('''CREATE TABLE eventos(
+        id BIGINT NOT NULL,
+        titulo VARCHAR(1024),
+        descripcion VARCHAR(2048),
+        inicio DATETIME,
+        fin DATETIME,
+        PRIMARY KEY (id)
+        )''')
     conn.commit()
 
     cursor.execute('''DROP TABLE IF EXISTS localizaciones''')
@@ -40,6 +50,15 @@ def create_users(conn):
     cursor.execute('''INSERT usuarios(id,rol) VALUES(207767757,"admin")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(267547511,"alumno")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(686981968,"alumno")''')
+    cursor.execute('''INSERT valoraciones(id,positivas,negativas) VALUES(0,0,0)''')
+    conn.commit()
+    
+def create_events(conn):
+    cursor = conn.cursor()
+    cursor.execute('''DELETE FROM eventos''')
+    cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(232543201977,"Prueba","Aula A3.10\nSpeaker : Juanra", "2021-12-01T10:00:00", "2021-12-01T12:00:00")''')
+    cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(232521435544,"Prueba2","Aula B1.35\nSpeaker : Jesús", "2021-12-26T10:00:00", "2021-12-25T12:00:00")''')
+    cursor.execute('''INSERT eventos(id,titulo,descripcion,inicio,fin) VALUES(204365020277,"Lo que nadie me contó durante la universidad","Aula A3.10\nSpeaker : Alberto Fernández", "2021-12-02T10:00:00", "2021-12-02T12:00:00")''')
     conn.commit()
 
 def create_localizaciones(conn):
@@ -63,3 +82,4 @@ if __name__ == '__main__':
     create_tables(conn)
     create_users(conn)
     create_localizaciones(conn)
+    create_events(conn)
