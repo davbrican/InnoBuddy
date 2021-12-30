@@ -6,3 +6,4 @@ telethon
 beautifulsoup4
 markdown
 mysql-connector-python
+opencv-python
