@@ -63,7 +63,6 @@ async def test_start_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['start']) in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(1.0)
         
 
 @mark.asyncio
