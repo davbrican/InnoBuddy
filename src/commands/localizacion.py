@@ -36,9 +36,10 @@ def localizacion(update, context):
         coordenadas=(ejex,ejey)
         
         planta = identificador.split('.')[0][-1]
-        imagen_path = "./InnoBuddy/data/img/"+ planta +"planta.jpg"    
-        
+        imagen_path = "./data/img/" + planta + "planta.jpg"    
+
         src = cv2.imread(imagen_path)
+
         scale_percent = 50
         width = int(src.shape[1] * scale_percent / 100)
         height = int(src.shape[0] * scale_percent / 100)
@@ -46,8 +47,8 @@ def localizacion(update, context):
         img = cv2.resize(src, dsize)
 
         cv2.circle(img, (int(coordenadas[0]), int(coordenadas[1])),10,(0,0,255),-1) 
-        cv2.imwrite('./InnoBuddy/data/img/localizacionpedida.jpg', img)
-        context.bot.send_photo(update.message.chat_id, open('./InnoBuddy/data/img/localizacionpedida.jpg', 'rb'))
+        cv2.imwrite('./data/img/localizacionpedida.jpg', img)
+        context.bot.send_photo(update.message.chat_id, open('./data/img/localizacionpedida.jpg', 'rb'))
     else:
         context.bot.send_message(update.message.chat_id, readMessage("parametro_no_existe"), parse_mode='MarkdownV2')
         return

@@ -51,7 +51,7 @@ def create_localizaciones(conn):
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A3.10", 398, 457)''')
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("A3.11", 298, 457)''')
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("B1.34", 398, 365)''')
-    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("B1.35", 298, 365)''')
+    cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("B1.35", 418, 365)''')
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("H0.12", 601, 441)''')
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("H1.10", 524, 437)''')
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("I2.35", 666, 583)''')
