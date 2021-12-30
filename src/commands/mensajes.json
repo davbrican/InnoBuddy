@@ -9,5 +9,9 @@
     "upgradeAlready" : "¡Ya eres admin!",
     "upgradeInvalid" : "Código de invitación para admin inválido",
     "badCredentials" : "¡No tienes los credenciales necesarios!",
-    "ayudaAdmin" : "TODO ayuda admin"
+    "ayudaAdmin" : "TODO ayuda admin",
+    "eventos" : "¡Estos son los eventos de las jornadas Innosoft\\! \n\n",
+    "eventosDiaX" : "¡Estos son los eventos de las jornadas Innosoft del día ",
+    "eventosDiaInvalido" : "La fecha introducida es incorrecta, debe seguir el siguiente formato: YYYY\\-MM\\-DD, tambien puedes introducir /eventos hoy, para saber los eventos del día de hoy",
+    "noHayEventosParaDiaX" : "No existen eventos para el día "
 }

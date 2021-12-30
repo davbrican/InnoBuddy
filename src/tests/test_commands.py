@@ -8,8 +8,10 @@ import os
 import multiprocessing
 from dotenv import load_dotenv
 import json
-from telethon import TelegramClient
+from telethon import TelegramClient, events, Button
+from telethon.client import buttons
 from telethon.sessions import StringSession
+from telethon.tl.custom import button
 from telethon.tl.custom.message import Message
 import markdown
 from bs4 import BeautifulSoup
@@ -89,7 +91,5 @@ async def test_evidencias_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         print(resp.raw_text)
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
+        feature/issue-47
         time.sleep(1.0)
-        
-
-
