@@ -3,7 +3,7 @@ from telegram.botcommandscope import BotCommandScopeDefault
 from telegram.callbackquery import CallbackQuery
 from commands.start import start
 from commands.evidencias import evidencias
-from commands.valoraciones import responder_valoraciones
+from queries import queries
 from commands.fechas import fechas
 from commands.help import help
 from commands.socialMedias import socialmedias
@@ -18,9 +18,10 @@ from telegram import BotCommandScope
 
 
 def setUpHandlers(bot):
+    bot.add_handler(CallbackQueryHandler(queries))
+    
     bot.add_handler(CommandHandler('start',	start))
     bot.add_handler(CommandHandler('evidencias', evidencias))
-    bot.add_handler(CallbackQueryHandler(responder_valoraciones))
     bot.add_handler(CommandHandler('fechas', fechas))
     bot.add_handler(CommandHandler('help', help))
     bot.add_handler(CommandHandler('socialmedias', socialmedias))
