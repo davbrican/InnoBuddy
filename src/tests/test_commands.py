@@ -8,10 +8,8 @@ import os
 import multiprocessing
 from dotenv import load_dotenv
 import json
-from telethon import TelegramClient, events, Button
-from telethon.client import buttons
+from telethon import TelegramClient
 from telethon.sessions import StringSession
-from telethon.tl.custom import button
 from telethon.tl.custom.message import Message
 import markdown
 from bs4 import BeautifulSoup
@@ -19,7 +17,6 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 sys.path.append(os.path.dirname(currentdir))
 import main
 load_dotenv()
-
 def markdown_to_text(st):
     html = markdown.markdown(st)
     return "".join(BeautifulSoup(html).findAll(text=True))
@@ -45,7 +42,7 @@ async def client() -> TelegramClient:
     yield client
     await client.disconnect()
     await client.disconnected
-
+    
 @pytest.fixture(scope="session", autouse=True)
 async def initializer(request):
     def finalize():
@@ -53,9 +50,8 @@ async def initializer(request):
     p = multiprocessing.Process(target=main.main, args=(os.getenv("PRUEBAS_TOKEN"),))
     p.start()
     request.addfinalizer(finalize)
-
+    
 ################## TEST FUNCTIONS ################## 
-
 @mark.asyncio
 async def test_start_message(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=10) as conv:
@@ -65,7 +61,7 @@ async def test_start_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['start']) in resp.raw_text.replace("\n\n ","\n")
-        
+
 
 @mark.asyncio
 async def test_redes_sociales_messages(client: TelegramClient):
@@ -92,3 +88,4 @@ async def test_evidencias_message(client: TelegramClient):
         print(resp.raw_text)
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
         time.sleep(1.0)
+      
