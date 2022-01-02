@@ -89,3 +89,13 @@ async def test_evidencias_message(client: TelegramClient):
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
         time.sleep(1.0)
       
+@mark.asyncio
+async def test_help_message(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=10) as conv:
+        await conv.send_message("/help")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['help']) in resp.raw_text.replace("\n\n","\n")
+        time.sleep(1.0)
