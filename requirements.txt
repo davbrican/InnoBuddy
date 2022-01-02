@@ -9,3 +9,4 @@ mysql-connector-python
 pymongo==3.6
 pymongo[srv]
 opencv-python
+opencv-python-headless==4.2.0.32
