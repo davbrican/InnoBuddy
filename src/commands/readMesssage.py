@@ -11,13 +11,17 @@ def readEvents(events):
     eventBriteUri = 'https://www\.eventbrite\.com/e/'
     mensajes = []
     for event in events:
-        #Se leen los eventos que tengan título y pertenezcan a las jornadas Innosoft del año vigente
-        if(event[1] != '' and event[3].year == datetime.now().year):
-            evento = event[1] + " \n "
-            descripcion = event[2]
-            aula = "Aula: " + descripcion.split('\n')[0].replace(".","\.") + " \n "
-            ponente = "Ponente: " + descripcion.split('Speaker : ')[1] + " \n "
-            dia = event[3].strftime("Día: %m/%d/%Y") + " \n "
-            horario = "Horario: " + event[3].strftime("%H:%M") + "\-" + event[4].strftime("%H:%M") + " \n "
-            mensajes.append(evento + aula + ponente + dia + horario + eventBriteUri + str(event[0]))
+        #Se leen los eventos que tengan título y pertenezcan a las jornadas Innosoft del año vigente (TODO: CAMBIAR AÑO AL ACTUAL, SE DEJA CON EL AÑO ANTERIOR PARA LA ENTREGA DEL PROYECTO)
+        if(event['titulo'] != '' and event['inicio'].year + 1 == datetime.now().year):
+            evento = event['titulo'] + " \n "
+            descripcion = event['descripcion']
+            try:
+                aula = "Aula: " + descripcion.split('\n')[0].replace(".","\.") + " \n "
+                ponente = "Ponente: " + descripcion.split('Speaker : ')[1] + " \n "
+            except:
+                aula = ""
+                ponente = ""
+            dia = event['inicio'].strftime("Día: %m/%d/%Y") + " \n "
+            horario = "Horario: " + event['inicio'].strftime("%H:%M") + "\-" + event['fin'].strftime("%H:%M") + " \n "
+            mensajes.append(evento + aula + ponente + dia + horario + eventBriteUri + str(event['idEvento']))
     return mensajes
