@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+import re
 
 def readMessage(command):
     with open(os.path.dirname(__file__) + "/mensajes.json", "r", encoding="UTF-8") as file:
@@ -21,7 +22,18 @@ def readEvents(events):
             except:
                 aula = ""
                 ponente = ""
-            dia = event['inicio'].strftime("Día: %m/%d/%Y") + " \n "
+            dia = event['inicio'].strftime("Día: %d/%m/%Y") + " \n "
             horario = "Horario: " + event['inicio'].strftime("%H:%M") + "\-" + event['fin'].strftime("%H:%M") + " \n "
-            mensajes.append(evento + aula + ponente + dia + horario + eventBriteUri + str(event['idEvento']))
+            eventoFormateado = evento.translate(str.maketrans({
+                        "-": "\-",
+                        "]":  "\]",
+                        "^":  "\^",
+                        "$":  "\$",
+                        "*":  "\*",
+                        ".":  "\.",
+                        "(":  "\(",
+                        ")":  "\)"
+                        }))
+            mensaje = eventoFormateado + aula + ponente + dia + horario + eventBriteUri + str(event['idEvento'])
+            mensajes.append(mensaje)
     return mensajes
