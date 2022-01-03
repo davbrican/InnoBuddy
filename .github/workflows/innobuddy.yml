@@ -59,3 +59,4 @@ jobs:
         MYSQL_DB: innobuddy
       run: |
         pytest ./src/tests/test_commands.py
+        pytest ./src/tests/test_start_service.py
