@@ -1,7 +1,6 @@
 import json
 import os
 from datetime import datetime
-import re
 
 def readMessage(command):
     with open(os.path.dirname(__file__) + "/mensajes.json", "r", encoding="UTF-8") as file:

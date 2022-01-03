@@ -1,9 +1,7 @@
-import json
-import os
 from commands.readMesssage import readMessage
-from commands.valoraciones import valoraciones
+from commands.ratings import ratings
 
-def fechas(update, context):
+def dates(update, context):
     mensaje = readMessage("fechas")
     context.bot.send_message(update.message.chat_id, mensaje, parse_mode='MarkdownV2')
-    valoraciones(update, context)
+    ratings(update, context)

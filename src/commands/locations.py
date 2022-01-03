@@ -1,5 +1,5 @@
 from commands.readMesssage import readMessage
-from commands.valoraciones import valoraciones
+from commands.ratings import ratings
 import os
 import sys
 import inspect
@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(currentdir)+"/services")
 import localizaciones_service
 load_dotenv()
 
-def localizacion(update, context):
+def locations(update, context):
     
     if len(context.args) == 0:
         context.bot.send_message(update.message.chat_id, readMessage("ayuda_localizacion"), parse_mode='MarkdownV2')
@@ -53,4 +53,4 @@ def localizacion(update, context):
         context.bot.send_message(update.message.chat_id, readMessage("parametro_no_existe"), parse_mode='MarkdownV2')
         return
 
-    valoraciones(update, context)
+    ratings(update, context)

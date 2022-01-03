@@ -1,13 +1,8 @@
-import json
-import os
-
-from telegram.ext.callbackcontext import CallbackContext
 from commands.readMesssage import readMessage
-import telegram
 from telegram import *
 
 
-def valoraciones(update, context):
+def ratings(update, context):
     me = context.bot.get_me()
 
     # Welcome message

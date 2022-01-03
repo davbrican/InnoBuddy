@@ -1,6 +1,4 @@
 from telegram import *
-import json
-import os
 from utils import connect
 
 def queries(update, context):
