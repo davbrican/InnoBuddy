@@ -52,6 +52,7 @@ jobs:
         TELEGRAM_APP_HASH: ${{ secrets.TELEGRAM_APP_HASH }}
         TELETHON_SESSION: ${{ secrets.TELETHON_SESSION }}
         BOT_PRUEBAS: ${{ secrets.BOT_PRUEBAS }}
+        LINK_MONGO: ${{ secrets.LINK_MONGO }}
         MYSQL_HOST: localhost
         MYSQL_USER: test
         MYSQL_PASS: test
