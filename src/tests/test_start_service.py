@@ -2,9 +2,8 @@ import os
 import sys
 import inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-sys.path.append(os.path.dirname(currentdir)+"/commands/services")
+sys.path.append(os.path.dirname(currentdir)+"/services")
 import start_service
-sys.path.append(os.path.dirname(currentdir)+"/db/")
 
 ## Necesita popular después de ejecutar estas pruebas, afectan directamente al contenido de la base de datos
 ## Correrlas dos veces seguidas sin popular conlleva el fallo de varias pruebas en la segunda ejecución
