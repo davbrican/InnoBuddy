@@ -17,5 +17,11 @@
     "ayuda_localizacion" : "El comando localizacion te ayudará a localizar aulasde la escuela, para ello utiliza '/localizacion aula \\<AULA\\>'\\.",
     "ayuda_aula" : "Añade al comando el aula que quieras siguiendo el formato de la escuela, BloquePlanta\\.Número\\_aula, por ejemplo A1\\.16",
     "aula_no_existe" : "El aula introducida no existe",
-    "parametro_no_existe" : "El parámetro introducido no existe\\."
+    "parametro_no_existe" : "El parámetro introducido no existe\\.",
+    "comando_social_medias" : "Ver nuestras redes sociales",
+    "comando_evidencias" : "Información acerca de las evidencias",
+    "comando_fechas" : "Fechas en las que tendran lugar las jornadas",
+    "comando_eventos" : "Mira todos nuestros eventos",
+    "comando_help" : "Te explicamos cualquier duda sobre el bot",
+    "comando_localizacion" : "Localización de las aulas"
 }
