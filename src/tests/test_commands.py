@@ -13,10 +13,13 @@ from telethon.sessions import StringSession
 from telethon.tl.custom.message import Message
 import markdown
 from bs4 import BeautifulSoup
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir))
+
 import main
 load_dotenv()
+
 def markdown_to_text(st):
     html = markdown.markdown(st)
     return "".join(BeautifulSoup(html).findAll(text=True))
@@ -99,3 +102,49 @@ async def test_help_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['help']) in resp.raw_text.replace("\n\n","\n")
         time.sleep(1.0)
+        
+
+@mark.asyncio
+async def test_eventos_message(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/eventos")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        resp2: Message = await conv.get_response()
+        assert markdown_to_text(messages['eventos']) in resp.raw_text.replace("\n\n ","\n")
+        assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
+        time.sleep(10.0)
+        
+@mark.asyncio
+async def test_eventos_dia_message(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        #Comprobacion de que no se puede enviar un dia con un formato invalido
+        await conv.send_message("/eventos 2000/10/10")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['eventosDiaInvalido']) in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(1.0)
+        
+        #Comprobacion de que si un dia no tiene eventos programados se muestra un mensaje al respecto
+        await conv.send_message("/eventos 2000-10-10")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['noHayEventosParaDiaX']) in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(1.0)
+        
+        #Comprobacion de que devuelve los eventos de un dia concreto
+        await conv.send_message("/eventos 2021-11-08")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        resp2: Message = await conv.get_response()
+        assert markdown_to_text(messages['eventosDiaX']) in resp.raw_text.replace("\n\n ","\n")
+        assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
+        time.sleep(5.0)
