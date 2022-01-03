@@ -2,6 +2,7 @@ from telegram.botcommand import BotCommand
 from telegram.botcommandscope import BotCommandScopeDefault
 from telegram.callbackquery import CallbackQuery
 from commands.start import start
+from commands.readMesssage import readMessage
 from commands.evidencias import evidencias
 from queries import queries
 from commands.fechas import fechas
@@ -32,9 +33,12 @@ def setUpHandlers(bot):
     
 def settingCommands(bot):
     command = [
-        BotCommand(command='/socialmedias', description= 'Ver nuestras redes sociales'),
-        BotCommand(command='/evidencias', description ='Información acerca de las evidencias'),
-        BotCommand(command='/fechas', description='Enterate de las fechas de las charlas y eventos')
+        BotCommand(command='/socialmedias', description= readMessage('comando_social_medias')),
+        BotCommand(command='/evidencias', description =readMessage('comando_evidencias')),
+        BotCommand(command='/fechas', description=readMessage('comando_fechas')),
+        BotCommand(command='/eventos', description=readMessage('comando_eventos')),
+        BotCommand(command='/help', description=readMessage('comando_help')),
+        BotCommand(command='/localizacion', description=readMessage('comando_localizacion'))
     ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
