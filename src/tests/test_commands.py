@@ -141,3 +141,14 @@ async def test_eventos_dia_message(client: TelegramClient):
         assert markdown_to_text(messages['eventosDiaX']) in resp.raw_text.replace("\n\n ","\n")
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
         time.sleep(5.0)
+
+@mark.asyncio
+async def test_fechas_message(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=10) as conv:
+        await conv.send_message("/fechas")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['fechas']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
+        time.sleep(1.0)
