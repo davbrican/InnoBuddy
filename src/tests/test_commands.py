@@ -46,13 +46,6 @@ async def client() -> TelegramClient:
     await client.disconnect()
     await client.disconnected
     
-@pytest.fixture(scope="session", autouse=True)
-async def initializer(request):
-    def finalize():
-        p.terminate()
-    p = multiprocessing.Process(target=main.main, args=(os.getenv("PRUEBAS_TOKEN"),))
-    p.start()
-    request.addfinalizer(finalize)
     
 ################## TEST FUNCTIONS ################## 
 @mark.asyncio
