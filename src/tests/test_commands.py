@@ -48,13 +48,6 @@ async def client() -> TelegramClient:
     await client.disconnect()
     await client.disconnected
     
-@pytest.fixture(scope="session", autouse=True)
-async def initializer(request):
-    def finalize():
-        p.terminate()
-    p = multiprocessing.Process(target=main.main, args=(os.getenv("PRUEBAS_TOKEN"),))
-    p.start()
-    request.addfinalizer(finalize)
     
 ################## TEST FUNCTIONS ################## 
 @mark.asyncio
@@ -150,7 +143,7 @@ async def test_eventos_dia_message(client: TelegramClient):
         assert markdown_to_text(messages['eventosDiaX']) in resp.raw_text.replace("\n\n ","\n")
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
         time.sleep(5.0)
-        
+
 @mark.asyncio
 async def test_localizacion_message(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=20) as conv:
@@ -202,4 +195,15 @@ async def test_localizacion_message(client: TelegramClient):
         await conv.send_message("/localizacion aula A0.11")
         resp: Photo = await conv.get_response()
         assert is_image(resp)
+        time.sleep(1.0)
+
+@mark.asyncio
+async def test_fechas_message(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=10) as conv:
+        await conv.send_message("/fechas")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['fechas']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
         time.sleep(1.0)
