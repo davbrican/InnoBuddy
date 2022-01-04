@@ -1,4 +1,4 @@
-from commands.readMesssage import readMessage
+from scripts.readMesssage import readMessage
 from commands.ratings import ratings
 
 def evidences(update, context):

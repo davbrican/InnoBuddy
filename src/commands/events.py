@@ -1,4 +1,4 @@
-from commands.readMesssage import readMessage, readEvents
+from scripts.readMesssage import readMessage, readEvents
 import sys
 import os
 import inspect
