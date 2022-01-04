@@ -5,6 +5,7 @@ import os
 import inspect
 import re
 from datetime import datetime
+from commands.recordatorios import *
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir)+"/services")
@@ -36,4 +37,8 @@ def eventos(update, context):
     mensajes = readEvents(eventos)
     for mensaje in mensajes:
         context.bot.send_message(update.message.chat_id, mensaje, parse_mode='MarkdownV2')
+        user_id = update.message.from_user['id']
+        evento_id = mensaje.split("e/")[1]
+        
+        recordar(update, context, user_id, evento_id)
     return

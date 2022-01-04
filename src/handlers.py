@@ -1,6 +1,7 @@
 from telegram.botcommand import BotCommand
 from telegram.botcommandscope import BotCommandScopeDefault
 from telegram.callbackquery import CallbackQuery
+from commands.recordatorios import mis_recordatorios
 from commands.start import start
 from commands.readMesssage import readMessage
 from commands.evidencias import evidencias
@@ -30,6 +31,7 @@ def setUpHandlers(bot):
     bot.add_handler(CommandHandler('socialmedias', socialmedias))
     bot.add_handler(CommandHandler('admin', admin))
     bot.add_handler(CommandHandler('eventos', eventos))
+    bot.add_handler(CommandHandler('recordatorios', mis_recordatorios))
     
 def settingCommands(bot):
     command = [
@@ -38,7 +40,8 @@ def settingCommands(bot):
         BotCommand(command='/fechas', description=readMessage('comando_fechas')),
         BotCommand(command='/eventos', description=readMessage('comando_eventos')),
         BotCommand(command='/help', description=readMessage('comando_help')),
-        BotCommand(command='/localizacion', description=readMessage('comando_localizacion'))
+        BotCommand(command='/localizacion', description=readMessage('comando_localizacion')),
+        BotCommand(command='/recordatorios', description=readMessage('comando_recordatorios'))
     ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
