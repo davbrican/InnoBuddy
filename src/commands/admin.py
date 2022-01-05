@@ -1,4 +1,4 @@
-from commands.readMesssage import readMessage
+from scripts.readMesssage import readMessage
 import sys
 import os
 import inspect
@@ -12,7 +12,7 @@ def admin(update, context):
     is_admin = start_service.is_admin(update.message.chat_id)
 
     if len(context.args) == 0:
-        context.bot.send_message(update.message.chat_id, readMessage("ayudaAdmin"))
+        context.bot.send_message(update.message.chat_id, readMessage("ayuda_admin"))
         return
 
     arg1 = context.args[0]
@@ -20,16 +20,16 @@ def admin(update, context):
     if(arg1=='upgrade'):
         codigo_invitacion = context.args[1]
         if is_admin:
-            context.bot.send_message(update.message.chat_id, readMessage("upgradeAlready"))
+            context.bot.send_message(update.message.chat_id, readMessage("ascenso_cumplido"))
         elif codigo_invitacion==os.getenv('INVITATION_CODE'):
             start_service.upgrade_user(update.message.chat_id)
-            context.bot.send_message(update.message.chat_id, readMessage("upgradeOk"))
+            context.bot.send_message(update.message.chat_id, readMessage("ascenso_ok"))
         elif codigo_invitacion!=os.getenv('INVITATION_CODE'):
-            context.bot.send_message(update.message.chat_id, readMessage("upgradeInvalid"))
+            context.bot.send_message(update.message.chat_id, readMessage("ascenso_invalido"))
         return
 
     if(is_admin==False):
-        context.bot.send_message(update.message.chat_id, readMessage("badCredentials"))
+        context.bot.send_message(update.message.chat_id, readMessage("credenciales_erroneas"))
         return 
 
     if(arg1=='mensaje-global'):
