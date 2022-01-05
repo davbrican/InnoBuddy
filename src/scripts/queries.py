@@ -1,4 +1,8 @@
 from telegram import *
+import json
+import os
+
+from telegram import user
 from utils import connect
 
 def queries(update, context):
@@ -19,15 +23,20 @@ def queries(update, context):
     elif "like" in query.data:
         positivas += 1
         str_update = '''UPDATE valoraciones SET positivas = {pos_n} WHERE id = 0;'''.format(pos_n = positivas)
-    
-    keyboard = [[]]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    query.edit_message_text(
-        text="¡Muchas gracias por tu valoración!", reply_markup=reply_markup
-    )
-    
-    cursor.execute(str_update)
+    elif "save" in query.data:
+        user_id = query.data.split("|")[1]
+        evento_id = query.data.split("|")[2]
+        cursor.execute("INSERT INTO recordatorios VALUES("+str(user_id)+","+str(evento_id)+");")
+        
+    if "dislike" in query.data or "like" in query.data:
+        keyboard = [[]]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        query.edit_message_text(
+            text="¡Muchas gracias por tu valoración!", reply_markup=reply_markup
+        )
+        
+        cursor.execute(str_update)
 
     conn.commit()
     cursor.close()
-    conn.close()
+    conn.close()    

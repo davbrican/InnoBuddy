@@ -1,4 +1,5 @@
 from telegram.botcommand import BotCommand
+from commands.recordatorios import mis_recordatorios
 from commands.start import start
 from scripts.readMesssage import readMessage
 from commands.evidences import evidences
@@ -25,6 +26,7 @@ def setUpHandlers(bot):
     bot.add_handler(CommandHandler('ayuda', help))
     bot.add_handler(CommandHandler('redes', networks))
     bot.add_handler(CommandHandler('admin', admin))
+    bot.add_handler(CommandHandler('recordatorios', mis_recordatorios))
     bot.add_handler(CommandHandler('eventos', events))
     
 def settingCommands(bot):
@@ -33,6 +35,7 @@ def settingCommands(bot):
         BotCommand(command='/evidencias', description =readMessage('comando_evidencias')),
         BotCommand(command='/fechas', description=readMessage('comando_fechas')),
         BotCommand(command='/eventos', description=readMessage('comando_eventos')),
+        BotCommand(command='/recordatorios', description=readMessage('comando_recordatorios')),
         BotCommand(command='/ayuda', description=readMessage('comando_help')),
         BotCommand(command='/localizacion', description=readMessage('comando_localizacion'))
     ]

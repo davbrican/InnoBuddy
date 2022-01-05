@@ -23,5 +23,6 @@
     "comando_fechas" : "Fechas en las que tendran lugar las jornadas",
     "comando_eventos" : "Mira todos nuestros eventos",
     "comando_help" : "Te explicamos cualquier duda sobre el bot",
-    "comando_localizacion" : "Localización de las aulas"
+    "comando_localizacion" : "Localización de las aulas",
+    "comando_recordatorios": "Te recordamos todos los eventos que has guardado"
 }
