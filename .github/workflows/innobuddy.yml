@@ -14,6 +14,45 @@ jobs:
         python-version: ["3.9"]
     steps:
     - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Executing populate database
+      env:
+        MYSQL_HOST: ${{ secrets.HOST }}
+        MYSQL_USER: ${{ secrets.USERNAME }}
+        MYSQL_PASS: ${{ secrets.PASSWORD }}
+        MYSQL_DB: ${{ secrets.DATABASE }}
+      run: |
+        python src/db/populate.py
+    - name: Executing tests
+      env:
+        PRUEBAS_TOKEN: ${{ secrets.PRUEBAS_TOKEN }}
+        TELEGRAM_APP_ID: ${{ secrets.TELEGRAM_APP_ID }}
+        TELEGRAM_APP_HASH: ${{ secrets.TELEGRAM_APP_HASH }}
+        TELETHON_SESSION: ${{ secrets.TELETHON_SESSION }}
+        BOT_PRUEBAS: ${{ secrets.BOT_PRUEBAS }}
+        LINK_MONGO: ${{ secrets.LINK_MONGO }}
+        TOKEN: ${{ secrets.TOKEN }}
+        MYSQL_HOST: ${{ secrets.HOST }}
+        MYSQL_USER: ${{ secrets.USERNAME }}
+        MYSQL_PASS: ${{ secrets.PASSWORD }}
+        MYSQL_DB: ${{ secrets.DATABASE }}
+      run: |
+        timeout 180 python src/main.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+    steps:
+    - uses: actions/checkout@v2
     - name: Shutdown Ubuntu MySQL (SUDO)
       run: sudo service mysql stop
     - name: Set up Python ${{ matrix.python-version }}
@@ -25,26 +64,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest
-    - name: Set up MySQL 5.7
-      id: set-up-mysql
-      uses: mirromutth/mysql-action@master
-      with:
-        mysql version: 5.7
-        mysql database: innobuddy
-        mysql user: test
-        mysql password: test
     - name: Wait for set up
       run:
-        sleep 10
-    - name: Executing populate database
-      env:
-      #configurationn
-        MYSQL_HOST: localhost
-        MYSQL_USER: test
-        MYSQL_PASS: test
-        MYSQL_DB: innobuddy
-      run: |
-        python src/db/populate.py
+        sleep 20
     - name: Executing tests
       env:
         PRUEBAS_TOKEN: ${{ secrets.PRUEBAS_TOKEN }}
@@ -53,10 +75,11 @@ jobs:
         TELETHON_SESSION: ${{ secrets.TELETHON_SESSION }}
         BOT_PRUEBAS: ${{ secrets.BOT_PRUEBAS }}
         LINK_MONGO: ${{ secrets.LINK_MONGO }}
-        MYSQL_HOST: localhost
-        MYSQL_USER: test
-        MYSQL_PASS: test
-        MYSQL_DB: innobuddy
+        TOKEN: ${{ secrets.TOKEN }}
+        MYSQL_HOST: ${{ secrets.HOST }}
+        MYSQL_USER: ${{ secrets.USERNAME }}
+        MYSQL_PASS: ${{ secrets.PASSWORD }}
+        MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
         pytest ./src/tests/test_commands.py
         pytest ./src/tests/test_start_service.py

@@ -1,4 +1,4 @@
-from commands.readMesssage import readMessage
+from scripts.readMesssage import readMessage
 import sys
 import os
 import inspect
@@ -11,7 +11,6 @@ def start(update, context):
     
     # añade usuario si es la primera vez que ejecuta start
     start_service.add_user_if_new(int(user_id)) 
-    print(int(user_id))
 
     mensaje = readMessage("start")
     context.bot.send_message(update.message.chat_id, mensaje, parse_mode='MarkdownV2')

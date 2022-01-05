@@ -31,6 +31,13 @@ def create_tables(conn):
         ejey INT,
         PRIMARY KEY (aula)
         )''')
+    
+    
+    cursor.execute('''DROP TABLE IF EXISTS recordatorios''')
+    cursor.execute('''CREATE TABLE recordatorios(
+        id_usuario VARCHAR(25),
+        id_evento VARCHAR(25) 
+        )''')
     conn.commit()
 
 def create_users(conn):
