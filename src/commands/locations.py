@@ -1,5 +1,5 @@
-from commands.readMesssage import readMessage
-from commands.valoraciones import valoraciones
+from scripts.readMesssage import readMessage
+from commands.ratings import ratings
 import os
 import sys
 import inspect
@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(currentdir)+"/services")
 import localizaciones_service
 load_dotenv()
 
-def localizacion(update, context):
+def locations(update, context):
     
     if len(context.args) == 0:
         context.bot.send_message(update.message.chat_id, readMessage("ayuda_localizacion"), parse_mode='MarkdownV2')
@@ -36,7 +36,7 @@ def localizacion(update, context):
         coordenadas=(ejex,ejey)
         
         planta = identificador.split('.')[0][-1]
-        imagen_path = "./data/img/" + planta + "planta.jpg"    
+        imagen_path = "./static/img/" + planta + "planta.jpg"    
 
         src = cv2.imread(imagen_path)
 
@@ -47,10 +47,10 @@ def localizacion(update, context):
         img = cv2.resize(src, dsize)
 
         cv2.circle(img, (int(coordenadas[0]), int(coordenadas[1])),10,(0,0,255),-1) 
-        cv2.imwrite('./data/img/localizacionpedida.jpg', img)
-        context.bot.send_photo(update.message.chat_id, open('./data/img/localizacionpedida.jpg', 'rb'))
+        cv2.imwrite('./static/img/localizacionpedida.jpg', img)
+        context.bot.send_photo(update.message.chat_id, open('./static/img/localizacionpedida.jpg', 'rb'))
     else:
         context.bot.send_message(update.message.chat_id, readMessage("parametro_no_existe"), parse_mode='MarkdownV2')
         return
 
-    valoraciones(update, context)
+    ratings(update, context)

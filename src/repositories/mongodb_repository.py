@@ -1,7 +1,3 @@
-import pymongo
-import os
-from dotenv import load_dotenv
-import ssl
 from datetime import datetime
 from utils import load_mongo
     

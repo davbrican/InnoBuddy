@@ -64,11 +64,11 @@ async def test_start_message(client: TelegramClient):
 @mark.asyncio
 async def test_redes_sociales_messages(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=10) as conv:
-        await conv.send_message("/socialmedias")
+        await conv.send_message("/redes")
         f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
         messages = json.load(f)
         f.close()
-        comp1 = markdown_to_text(messages['socialmedias'])
+        comp1 = markdown_to_text(messages['redes_sociales'])
         resp: Message = await conv.get_response()
         comp2 = resp.raw_text.replace("\n\n ","\n")
         print('redes sociales:' + resp.raw_text)
@@ -90,12 +90,12 @@ async def test_evidencias_message(client: TelegramClient):
 @mark.asyncio
 async def test_help_message(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=10) as conv:
-        await conv.send_message("/help")
+        await conv.send_message("/ayuda")
         f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
         messages = json.load(f)
         f.close()
         resp: Message = await conv.get_response()
-        assert markdown_to_text(messages['help']) in resp.raw_text.replace("\n\n","\n")
+        assert markdown_to_text(messages['ayuda']) in resp.raw_text.replace("\n\n","\n")
         time.sleep(1.0)
         
 
@@ -110,7 +110,7 @@ async def test_eventos_message(client: TelegramClient):
         resp2: Message = await conv.get_response()
         assert markdown_to_text(messages['eventos']) in resp.raw_text.replace("\n\n ","\n")
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
-        time.sleep(10.0)
+        time.sleep(20.0)
         
 @mark.asyncio
 async def test_eventos_dia_message(client: TelegramClient):
@@ -121,8 +121,8 @@ async def test_eventos_dia_message(client: TelegramClient):
         messages = json.load(f)
         f.close()
         resp: Message = await conv.get_response()
-        assert markdown_to_text(messages['eventosDiaInvalido']) in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(1.0)
+        assert markdown_to_text(messages['eventos_dia_invalido']) in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(5.0)
         
         #Comprobacion de que si un dia no tiene eventos programados se muestra un mensaje al respecto
         await conv.send_message("/eventos 2000-10-10")
@@ -130,8 +130,8 @@ async def test_eventos_dia_message(client: TelegramClient):
         messages = json.load(f)
         f.close()
         resp: Message = await conv.get_response()
-        assert markdown_to_text(messages['noHayEventosParaDiaX']) in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(1.0)
+        assert markdown_to_text(messages['no_hay_eventos_para_dia_x']) in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(5.0)
         
         #Comprobacion de que devuelve los eventos de un dia concreto
         await conv.send_message("/eventos 2021-11-08")
@@ -140,7 +140,7 @@ async def test_eventos_dia_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         resp2: Message = await conv.get_response()
-        assert markdown_to_text(messages['eventosDiaX']) in resp.raw_text.replace("\n\n ","\n")
+        assert markdown_to_text(messages['eventos_dia_x']) in resp.raw_text.replace("\n\n ","\n")
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
         time.sleep(5.0)
 
