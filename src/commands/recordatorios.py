@@ -1,12 +1,7 @@
-import json
-import os
-
-from telegram.ext.callbackcontext import CallbackContext
-from commands.readMesssage import readEvents
-import telegram
+from scripts.readMesssage import readEvents
 from telegram import *
 from db.utils import connect
-from db.mongodb import get_by_id
+from services.mongodb_service import get_by_id
 
 
 def recordar(update, context, user_id, evento_id):
