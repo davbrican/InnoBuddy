@@ -16,7 +16,10 @@ def main(TOKEN):
 	setUpHandlers(bot)
 	settingCommands(bot_command)
 
-	updater.start_polling()
+	if (os.getenv("ENV") == "local"):
+		updater.start_polling()
+	else:
+		updater.start_webhook(port=8000)
 	updater.idle()
 
 if __name__ == '__main__':
