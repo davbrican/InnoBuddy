@@ -81,4 +81,6 @@ jobs:
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
+        pytest ./src/tests/test_start_service.py
         pytest ./src/tests/test_commands.py
+        
