@@ -6,3 +6,7 @@ telethon
 beautifulsoup4
 markdown
 mysql-connector-python
+pymongo==3.6
+pymongo[srv]
+opencv-python-headless
+locust
