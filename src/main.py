@@ -19,7 +19,7 @@ def main(TOKEN):
 	if (os.getenv("ENV") == "local"):
 		updater.start_polling()
 	else:
-		updater.start_webhook(port=8000)
+		updater.start_webhook(port=80)
 	updater.idle()
 
 if __name__ == '__main__':
