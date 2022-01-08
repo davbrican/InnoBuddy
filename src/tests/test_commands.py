@@ -99,18 +99,6 @@ async def test_help_message(client: TelegramClient):
         time.sleep(1.0)
         
 
-@mark.asyncio
-async def test_eventos_message(client: TelegramClient):
-    async with client.conversation(testbot_name, timeout=20) as conv:
-        await conv.send_message("/eventos")
-        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
-        messages = json.load(f)
-        f.close()
-        resp: Message = await conv.get_response()
-        resp2: Message = await conv.get_response()
-        assert markdown_to_text(messages['eventos']) in resp.raw_text.replace("\n\n ","\n")
-        assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
-        time.sleep(20.0)
         
 @mark.asyncio
 async def test_eventos_dia_message(client: TelegramClient):
@@ -144,6 +132,7 @@ async def test_eventos_dia_message(client: TelegramClient):
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
         time.sleep(5.0)
 
+        
 @mark.asyncio
 async def test_localizacion_message(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=20) as conv:
@@ -207,3 +196,27 @@ async def test_fechas_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['fechas']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
         time.sleep(1.0)
+
+
+@mark.asyncio
+async def test_recodatorios(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/recordatorios")
+        resp: Message = await conv.get_response()
+        assert "Prueba 1 Eventia" in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(5.0)
+        
+@mark.asyncio
+async def test_eventos_message(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/eventos")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        resp2: Message = await conv.get_response()
+        assert markdown_to_text(messages['eventos']) in resp.raw_text.replace("\n\n ","\n")
+        assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
+        resp3: Message = await conv.get_response()
+        assert 'Guardar este evento' in resp3.raw_text.replace("\n\n ","\n")
+        time.sleep(30.0)
