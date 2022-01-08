@@ -1,4 +1,4 @@
-name: tests
+name: Innobuddy Python
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
         python src/db/populate.py
-    - name: Executing tests
+    - name: Running application
       env:
         PRUEBAS_TOKEN: ${{ secrets.PRUEBAS_TOKEN }}
         TELEGRAM_APP_ID: ${{ secrets.TELEGRAM_APP_ID }}
