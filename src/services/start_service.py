@@ -30,3 +30,5 @@ def is_admin(id):
 def upgrade_user(id):
     return start_repository.upgrade_user(id)
 
+def get_recordatorios(user_id):
+    return start_repository.get_recordatorios(user_id)
