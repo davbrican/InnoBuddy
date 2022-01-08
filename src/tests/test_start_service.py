@@ -34,3 +34,6 @@ def test_upgrade_user():
     assert start_service.find_user_by_id(267547511)[1] == 'alumno'
     start_service.upgrade_user(267547511)
     assert start_service.find_user_by_id(267547511)[1] == 'admin'
+    
+def test_get_recordatorios():
+    assert start_service.get_recordatorios("483048011")[0][1] == "206188845387"
