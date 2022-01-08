@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+
+  mysql:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+    hostname: ${MYSQL_HOST}
+    volumes:
+      - sql_volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  innobuddy:
+    image: alebarled/innobuddy
+    links:
+     - mysql
+    environment:
+      TOKEN: ${TOKEN}
+      PRUEBAS_TOKEN: ${PRUEBAS_TOKEN}
+      TELEGRAM_APP_ID: ${TELEGRAM_APP_ID}
+      TELEGRAM_APP_HASH: ${TELEGRAM_APP_HASH}
+      TELETHON_SESSION: ${TELETHON_SESSION}
+      BOT_PRUEBAS: ${BOT_PRUEBAS}
+      INVITATION_CODE: ${INVITATION_CODE}
+      LINK_MONGO: ${LINK_MONGO}
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASS: ${MYSQL_PASS}
+      MYSQL_HOST: ${MYSQL_HOST}
+      
+volumes:
+  sql_volume:
