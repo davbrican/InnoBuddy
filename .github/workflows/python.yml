@@ -83,4 +83,11 @@ jobs:
       run: |
         pytest ./src/tests/test_start_service.py
         pytest ./src/tests/test_commands.py
-        
+    - name: Executing Coverage
+      run: |
+        python -m coverage run -m pytest src/tests/test_start_service.py src/tests/test_commands.py
+        coverage report -i
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}

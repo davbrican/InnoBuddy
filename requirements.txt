@@ -10,3 +10,4 @@ pymongo==3.6
 pymongo[srv]
 opencv-python-headless
 locust
+coverage
