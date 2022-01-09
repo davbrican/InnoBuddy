@@ -14,9 +14,12 @@ import markdown
 from bs4 import BeautifulSoup
 from telethon.tl.types import Photo
 from telethon.utils import is_image 
-
+from datetime import datetime
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir))
+
+from services.mongodb_service import get_by_day
+
 
 load_dotenv()
 
@@ -132,7 +135,23 @@ async def test_eventos_dia_con_eventos_message(client: TelegramClient):
         resp2: Message = await conv.get_response()
         assert markdown_to_text(messages['eventos_dia_x']) in resp.raw_text.replace("\n\n ","\n")
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
-        time.sleep(5.0)
+        time.sleep(15.0)
+        
+@mark.asyncio
+async def test_eventos_dia_actual_message(client: TelegramClient):
+     async with client.conversation(testbot_name, timeout=20) as conv:
+        #Comprobacion de que devuelve los eventos del dia de hoy
+        eventos = get_by_day(datetime.now())
+        await conv.send_message("/eventos hoy")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        if len(list(eventos.clone())) == 0:
+            assert markdown_to_text(messages['no_hay_eventos_para_dia_x']+"de hoy") in resp.raw_text.replace("\n\n ","\n")
+        else:
+            assert markdown_to_text(messages['eventos_dia_x']+"de hoy\!") in resp.raw_text.replace("\n\n ","\n")
+        time.sleep(15.0)
 
         
 @mark.asyncio
