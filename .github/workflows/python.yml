@@ -81,7 +81,7 @@ jobs:
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
-        python -m coverage run -m pytest src/tests/test_user_service.py src/tests/test_commands.py
+        python -m coverage run -m pytest src/tests/test_rating_service.py pytest src/tests/test_user_service.py src/tests/test_commands.py
     - name: Create coverage report
       run: |
         coverage report -i
