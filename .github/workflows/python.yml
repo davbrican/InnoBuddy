@@ -81,6 +81,11 @@ jobs:
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
-        pytest ./src/tests/test_start_service.py
-        pytest ./src/tests/test_commands.py
-        
+        python -m coverage run -m pytest src/tests/test_start_service.py src/tests/test_commands.py
+    - name: Create coverage report
+      run: |
+        coverage report -i
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}

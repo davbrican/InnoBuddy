@@ -11,3 +11,4 @@ pymongo[srv]==3.6.0
 opencv-python-headless==4.5.5.62
 locust==2.5.1
 coverage==6.2
+
