@@ -24,5 +24,6 @@
     "comando_eventos" : "Mira todos nuestros eventos",
     "comando_help" : "Te explicamos cualquier duda sobre el bot",
     "comando_localizacion" : "Localización de las aulas",
-    "comando_recordatorios": "Todos tus eventos guardados"
+    "comando_recordatorios": "Todos tus eventos guardados",
+    "sin_recordatorios": "Aún no has guardado ningún evento"
 }
