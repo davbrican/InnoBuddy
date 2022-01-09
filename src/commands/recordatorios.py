@@ -3,7 +3,7 @@ from scripts.readMesssage import readEvents
 from telegram import *
 from db.utils import connect
 from services.mongodb_service import get_by_id
-from services.start_service import get_recordatorios
+from user_service import get_recordatorios
 
 def recordar(update, context, user_id, evento_id):
     me = context.bot.get_me()
