@@ -71,7 +71,7 @@ async def test_redes_sociales_messages(client: TelegramClient):
         comp2 = resp.raw_text.replace("\n\n ","\n")
         print('redes sociales:' + resp.raw_text)
         assert comp1 in comp2
-        time.sleep(1.0)
+        time.sleep(3.0)
        
 @mark.asyncio
 async def test_evidencias_message(client: TelegramClient):
@@ -83,7 +83,7 @@ async def test_evidencias_message(client: TelegramClient):
         resp: Message = await conv.get_response()
         print(resp.raw_text)
         assert markdown_to_text(messages['evidencias']) in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(1.0)
+        time.sleep(3.0)
       
 @mark.asyncio
 async def test_help_message(client: TelegramClient):
@@ -94,7 +94,7 @@ async def test_help_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['ayuda']) in resp.raw_text.replace("\n\n","\n")
-        time.sleep(1.0)
+        time.sleep(3.0)
         
 @mark.asyncio
 async def test_eventos_dia_formato_incorrecto_message(client: TelegramClient):
@@ -106,7 +106,7 @@ async def test_eventos_dia_formato_incorrecto_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['eventos_dia_invalido']) in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(1.0)
+        time.sleep(3.0)
 
 @mark.asyncio
 async def test_eventos_dia_sin_eventos_message(client: TelegramClient):
@@ -118,7 +118,7 @@ async def test_eventos_dia_sin_eventos_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['no_hay_eventos_para_dia_x']) in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(1.0)
+        time.sleep(3.0)
         
 @mark.asyncio
 async def test_eventos_dia_con_eventos_message(client: TelegramClient):
@@ -146,7 +146,7 @@ async def test_localizacion_informacion_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['ayuda_localizacion']) in resp.raw_text.replace("<", "\\<")
-        time.sleep(1.0)
+        time.sleep(3.0)
         
 @mark.asyncio
 async def test_localizacion_informacion_aula_message(client: TelegramClient):
@@ -158,7 +158,7 @@ async def test_localizacion_informacion_aula_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['ayuda_aula']) in resp.raw_text
-        time.sleep(1.0)
+        time.sleep(3.0)
        
 @mark.asyncio
 async def test_localizacion_informacion_formato_aula_message(client: TelegramClient):
@@ -170,7 +170,7 @@ async def test_localizacion_informacion_formato_aula_message(client: TelegramCli
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['ayuda_aula']) in resp.raw_text
-        time.sleep(1.0)
+        time.sleep(3.0)
         
         await conv.send_message("/localizacion aula AA:111")
         f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
@@ -178,7 +178,7 @@ async def test_localizacion_informacion_formato_aula_message(client: TelegramCli
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['ayuda_aula']) in resp.raw_text
-        time.sleep(1.0)
+        time.sleep(3.0)
 
 @mark.asyncio
 async def test_localizacion_aula_no_existe_message(client: TelegramClient):
@@ -190,7 +190,7 @@ async def test_localizacion_aula_no_existe_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['aula_no_existe']) in resp.raw_text
-        time.sleep(1.0)
+        time.sleep(3.0)
         
 @mark.asyncio
 async def test_localizacion_aula_existe_message(client: TelegramClient):
@@ -198,7 +198,7 @@ async def test_localizacion_aula_existe_message(client: TelegramClient):
         await conv.send_message("/localizacion aula A0.11")
         resp: Photo = await conv.get_response()
         assert is_image(resp)
-        time.sleep(1.0)
+        time.sleep(3.0)
 
 @mark.asyncio
 async def test_fechas_message(client: TelegramClient):
@@ -209,7 +209,7 @@ async def test_fechas_message(client: TelegramClient):
         f.close()
         resp: Message = await conv.get_response()
         assert markdown_to_text(messages['fechas']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
-        time.sleep(1.0)
+        time.sleep(3.0)
 
 
 @mark.asyncio
