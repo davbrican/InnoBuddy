@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir)+"/services")
 import user_service
+import ratings_service
 load_dotenv()
 
 def admin(update, context):
@@ -46,3 +47,14 @@ def admin(update, context):
                 print(f'Fallo al enviar mensaje al usuario {i}')
         context.bot.send_message(update.message.chat_id, f'Mensaje enviado a {number} usuarios')
         return
+
+    if(arg1=='estadisticas'):
+        users = len(user_service.find_all_users())
+        ratings = ratings_service.get_all_ratings()
+        positive = ratings[0][1]
+        negative = ratings[0][2]
+        total = positive + negative
+        positive_percentage = round(positive / total  * 100,2) if total != 0 else 0
+        negative_percentage = round(negative / total * 100,2) if total != 0 else 0
+        
+        context.bot.send_message(update.message.chat_id, f'Un total de {users} usuarios distintos han utilizado el bot.\n\nValoraciones:\nPOSITIVAS: {positive_percentage}% ({positive})\nNEGATIVAS: {negative_percentage}% ({negative})')
