@@ -37,3 +37,10 @@ def test_upgrade_user():
     
 def test_get_recordatorios():
     assert user_service.get_recordatorios("483048011")[0][1] == "206188845387"
+    
+def test_insert_recordatorios():
+    assert len(user_service.get_recordatorios("483048011")) == 1
+    user_service.insert_recordatorio("483048011", "205203869297")
+    assert len(user_service.get_recordatorios("483048011")) == 2
+    assert user_service.get_recordatorios("483048011")[1][1] == "205203869297"
+    
