@@ -53,4 +53,15 @@ def get_recordatorios(user_id):
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM `recordatorios` WHERE id_usuario LIKE "+str(user_id)+";")
     data = list(set([i for i in cursor]))
+    cursor.close()
+    conn.close()    
+    
     return data
+
+def insert_recordatorios(user_id, evento_id):
+    conn = utils.connect()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO recordatorios VALUES("+str(user_id)+","+str(evento_id)+");")
+    conn.commit()
+    cursor.close()
+    conn.close()    

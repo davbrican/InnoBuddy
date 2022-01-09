@@ -32,3 +32,6 @@ def upgrade_user(id):
 
 def get_recordatorios(user_id):
     return user_repository.get_recordatorios(user_id)
+
+def insert_recordatorio(user_id, evento_id):
+    return user_repository.insert_recordatorios(user_id, evento_id)
