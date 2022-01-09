@@ -39,6 +39,7 @@ jobs:
         BOT_PRUEBAS: ${{ secrets.BOT_PRUEBAS }}
         LINK_MONGO: ${{ secrets.LINK_MONGO }}
         TOKEN: ${{ secrets.TOKEN }}
+        INVITATION_CODE: ${{ secrets.INVITATION_CODE }}
         MYSQL_HOST: ${{ secrets.HOST }}
         MYSQL_USER: ${{ secrets.USERNAME }}
         MYSQL_PASS: ${{ secrets.PASSWORD }}
