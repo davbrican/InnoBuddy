@@ -45,7 +45,7 @@ jobs:
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
-        timeout 180 python src/main.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        timeout 200 python src/main.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
 
   tests:
     runs-on: ubuntu-latest
