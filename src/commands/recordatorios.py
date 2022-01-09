@@ -4,6 +4,7 @@ from telegram import *
 from db.utils import connect
 from services.mongodb_service import get_by_id
 from services.user_service import get_recordatorios
+from commands.ratings import ratings
 
 def recordar(update, context, user_id, evento_id):
     me = context.bot.get_me()
@@ -23,3 +24,4 @@ def mis_recordatorios(update, context):
     for i in data:
         for j in readEvents([get_by_id(int(i[1]))]):
             context.bot.send_message(user_id, j, parse_mode='MarkdownV2')
+    ratings(update, context)
