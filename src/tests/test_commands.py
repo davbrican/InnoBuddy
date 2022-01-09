@@ -219,7 +219,7 @@ async def test_recodatorios(client: TelegramClient):
         await conv.send_message("/recordatorios")
         resp: Message = await conv.get_response()
         assert "Prueba 1 Eventia" in resp.raw_text.replace("\n\n ","\n")
-        time.sleep(5.0)
+        time.sleep(10.0)
         
 @mark.asyncio
 async def test_eventos_message(client: TelegramClient):
