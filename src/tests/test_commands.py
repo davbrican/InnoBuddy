@@ -123,7 +123,7 @@ async def test_eventos_dia_sin_eventos_message(client: TelegramClient):
         
 @mark.asyncio
 async def test_eventos_dia_con_eventos_message(client: TelegramClient):
-    async with client.conversation(testbot_name, timeout=20) as conv:
+    async with client.conversation(testbot_name, timeout=30) as conv:
         #Comprobacion de que devuelve los eventos de un dia concreto
         await conv.send_message("/eventos 2021-11-08")
         f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
@@ -133,7 +133,7 @@ async def test_eventos_dia_con_eventos_message(client: TelegramClient):
         resp2: Message = await conv.get_response()
         assert markdown_to_text(messages['eventos_dia_x']) in resp.raw_text.replace("\n\n ","\n")
         assert 'Quedada musical' in resp2.raw_text.replace("\n\n ","\n")
-        time.sleep(5.0)
+        time.sleep(20.0)
 
         
 @mark.asyncio
