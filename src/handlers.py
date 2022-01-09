@@ -37,7 +37,8 @@ def settingCommands(bot):
         BotCommand(command='/eventos', description=readMessage('comando_eventos')),
         BotCommand(command='/recordatorios', description=readMessage('comando_recordatorios')),
         BotCommand(command='/ayuda', description=readMessage('comando_help')),
-        BotCommand(command='/localizacion', description=readMessage('comando_localizacion'))
+        BotCommand(command='/localizacion', description=readMessage('comando_localizacion')),
+        BotCommand(command='/recordatorios', description=readMessage('comando_recordatorios'))
     ]
     bot.setMyCommands(commands=command)
     bot.getMyCommands()
