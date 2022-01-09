@@ -43,7 +43,8 @@ def create_tables(conn):
 def create_users(conn):
     cursor = conn.cursor()
     cursor.execute('''DELETE FROM usuarios''')
-    cursor.execute('''INSERT usuarios(id,rol) VALUES(207767757,"admin")''')
+    cursor.execute('''INSERT usuarios(id,rol) VALUES(123131313,"admin")''')
+    cursor.execute('''INSERT usuarios(id,rol) VALUES(207767757,"alumno")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(267547511,"alumno")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(686981968,"alumno")''')
     cursor.execute('''INSERT valoraciones(id,positivas,negativas) VALUES(0,0,0)''')

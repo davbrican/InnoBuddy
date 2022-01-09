@@ -80,6 +80,7 @@ jobs:
         MYSQL_USER: ${{ secrets.USERNAME }}
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
+        INVITATION_CODE: ${{ secrets.INVITATION_CODE }}
       run: |
         python -m coverage run -m pytest src/tests/test_rating_service.py src/tests/test_user_service.py src/tests/test_commands.py
     - name: Create coverage report
