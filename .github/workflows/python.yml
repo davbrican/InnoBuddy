@@ -39,12 +39,13 @@ jobs:
         BOT_PRUEBAS: ${{ secrets.BOT_PRUEBAS }}
         LINK_MONGO: ${{ secrets.LINK_MONGO }}
         TOKEN: ${{ secrets.TOKEN }}
+        INVITATION_CODE: ${{ secrets.INVITATION_CODE }}
         MYSQL_HOST: ${{ secrets.HOST }}
         MYSQL_USER: ${{ secrets.USERNAME }}
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
       run: |
-        timeout 180 python src/main.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        timeout 200 python src/main.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
 
   tests:
     runs-on: ubuntu-latest
@@ -80,6 +81,7 @@ jobs:
         MYSQL_USER: ${{ secrets.USERNAME }}
         MYSQL_PASS: ${{ secrets.PASSWORD }}
         MYSQL_DB: ${{ secrets.DATABASE }}
+        INVITATION_CODE: ${{ secrets.INVITATION_CODE }}
       run: |
         python -m coverage run -m pytest src/tests/test_rating_service.py src/tests/test_user_service.py src/tests/test_commands.py
     - name: Create coverage report

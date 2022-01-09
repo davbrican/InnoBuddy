@@ -31,6 +31,7 @@ api_id = int(os.getenv("TELEGRAM_APP_ID"))
 api_hash = os.getenv("TELEGRAM_APP_HASH")
 session_str = os.getenv("TELETHON_SESSION")
 testbot_name = os.getenv("BOT_PRUEBAS")
+codigo = os.getenv("INVITATION_CODE")
 
 @pytest.fixture(scope="session")
 def event_loop():
@@ -231,7 +232,6 @@ async def test_fechas_message(client: TelegramClient):
         assert markdown_to_text(messages['fechas']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
         time.sleep(5.0)
 
-
 @mark.asyncio
 async def test_recodatorios(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=20) as conv:
@@ -239,6 +239,41 @@ async def test_recodatorios(client: TelegramClient):
         resp: Message = await conv.get_response()
         assert "Prueba 1 Eventia" in resp.raw_text.replace("\n\n ","\n")
         time.sleep(10.0)
+        
+@mark.asyncio
+async def test_admin_codigo_invalido(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/admin upgrade 1234")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['ascenso_invalido']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
+        time.sleep(5.0)
+        
+@mark.asyncio
+async def test_admin_codigo_valido(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/admin upgrade " + codigo)
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['ascenso_ok']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
+        time.sleep(5.0)
+        
+@mark.asyncio
+async def test_admin_codigo_ya_admin(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/admin upgrade " + codigo)
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['ascenso_cumplido']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
+        time.sleep(5.0)
+        
+
         
 @mark.asyncio
 async def test_eventos_message(client: TelegramClient):
