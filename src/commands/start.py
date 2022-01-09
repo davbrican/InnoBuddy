@@ -5,6 +5,7 @@ import inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir)+"/services")
 import user_service
+from commands.ratings import ratings
 
 def start(update, context):
     user_id = update.message.from_user['id']
@@ -14,3 +15,4 @@ def start(update, context):
 
     mensaje = readMessage("start")
     context.bot.send_message(update.message.chat_id, mensaje, parse_mode='MarkdownV2')
+    ratings(update, context)
