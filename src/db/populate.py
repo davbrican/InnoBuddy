@@ -48,6 +48,7 @@ def create_users(conn):
     cursor.execute('''INSERT usuarios(id,rol) VALUES(686981968,"alumno")''')
     cursor.execute('''INSERT valoraciones(id,positivas,negativas) VALUES(0,0,0)''')
     cursor.execute('''INSERT recordatorios(id_usuario, id_evento) VALUES("483048011", "206188845387")''')
+    cursor.execute('''INSERT recordatorios(id_usuario, id_evento) VALUES("207767757", "206188845387")''')
     conn.commit()
 
 def create_localizaciones(conn):
