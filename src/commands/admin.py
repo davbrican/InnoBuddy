@@ -5,11 +5,11 @@ import inspect
 from dotenv import load_dotenv
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir)+"/services")
-import start_service
+import user_service
 load_dotenv()
 
 def admin(update, context):
-    is_admin = start_service.is_admin(update.message.chat_id)
+    is_admin = user_service.is_admin(update.message.chat_id)
 
     if len(context.args) == 0:
         context.bot.send_message(update.message.chat_id, readMessage("ayuda_admin"))
@@ -22,7 +22,7 @@ def admin(update, context):
         if is_admin:
             context.bot.send_message(update.message.chat_id, readMessage("ascenso_cumplido"))
         elif codigo_invitacion==os.getenv('INVITATION_CODE'):
-            start_service.upgrade_user(update.message.chat_id)
+            user_service.upgrade_user(update.message.chat_id)
             context.bot.send_message(update.message.chat_id, readMessage("ascenso_ok"))
         elif codigo_invitacion!=os.getenv('INVITATION_CODE'):
             context.bot.send_message(update.message.chat_id, readMessage("ascenso_invalido"))
@@ -34,7 +34,7 @@ def admin(update, context):
 
     if(arg1=='mensaje-global'):
         mensaje = ' '.join(context.args[1:])
-        ids = [id for id,rol in start_service.find_all_users()]
+        ids = [id for id,rol in user_service.find_all_users()]
         own_id = update.message.chat_id
         number = 0
         for i in ids:
