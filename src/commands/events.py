@@ -5,6 +5,7 @@ import inspect
 import re
 from datetime import datetime
 from commands.recordatorios import *
+from commands.ratings import ratings
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir)+"/services")
@@ -40,4 +41,5 @@ def events(update, context):
         evento_id = mensaje.split("e/")[1]
         
         recordar(update, context, user_id, evento_id)
+    ratings(update, context)
     return
