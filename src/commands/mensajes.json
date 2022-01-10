@@ -10,7 +10,7 @@
     "ascenso_cumplido" : "¡Ya eres admin!",
     "ascenso_invalido" : "Código de invitación para admin inválido",
     "credenciales_erroneas" : "¡No tienes los credenciales necesarios!",
-    "ayuda_admin" : "Si eres admin tienes algunas funcionalidades mas como administrador:\n\n/admin upgrade CLAVE : Incluyendo una clave correcta eleva tus credenciales a administrador\\.\n/admin mensaje\\-global MENSAJE : Envía un mensaje global a todos los usuarios de Innobuddy\\.\n/admin stats : Devuelve estadísticas como número de usuarios y satisfacción de las consultas\\.",
+    "ayuda_admin" : "Si eres admin tienes algunas funcionalidades mas como administrador:\n\n/admin upgrade CLAVE : Incluyendo una clave correcta eleva tus credenciales a administrador\\.\n/admin mensaje\\-global MENSAJE : Envía un mensaje global a todos los usuarios de Innobuddy\\.\n/admin estadisticas : Devuelve estadísticas como número de usuarios y satisfacción de las consultas\\.",
     "eventos" : "¡Estos son los eventos de las jornadas Innosoft\\!\n\n",
     "eventos_dia_x" : "¡Estos son los eventos de las jornadas Innosoft del día ",
     "eventos_dia_invalido" : "La fecha introducida es incorrecta, debe seguir el siguiente formato: YYYY\\-MM\\-DD, tambien puedes introducir /eventos hoy, para saber los eventos del día de hoy",
