@@ -2,7 +2,6 @@ import sys
 import os
 import inspect
 
-from pymongo import collection
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 sys.path.append(os.path.dirname(currentdir)+"/repositories")
 import mongodb_repository

@@ -1,9 +1,4 @@
 from telegram import *
-import json
-import os
-
-from telegram import user
-from utils import connect
 from services.ratings_service import get_all_ratings, update_ratings
 from services.user_service import insert_recordatorio
 
