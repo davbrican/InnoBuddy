@@ -89,3 +89,14 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+  deploy:
+    needs: tests
+    if: ${{github.ref == 'refs/heads/master'}}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "innobuddy"
+          heroku_email: "dbrincau@us.es"
