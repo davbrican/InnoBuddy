@@ -9,13 +9,6 @@ def create_tables(conn):
         PRIMARY KEY (id)
         )''')
 
-    cursor.execute('''DROP TABLE IF EXISTS mensajes''')
-    cursor.execute('''CREATE TABLE mensajes(
-        id VARCHAR(255) NOT NULL,
-        mensaje VARCHAR(2048),
-        PRIMARY KEY (id)
-        )''')
-
     cursor.execute('''DROP TABLE IF EXISTS valoraciones''')
     cursor.execute('''CREATE TABLE valoraciones(
         id INT NOT NULL,
@@ -43,10 +36,13 @@ def create_tables(conn):
 def create_users(conn):
     cursor = conn.cursor()
     cursor.execute('''DELETE FROM usuarios''')
-    cursor.execute('''INSERT usuarios(id,rol) VALUES(207767757,"admin")''')
+    cursor.execute('''INSERT usuarios(id,rol) VALUES(123131313,"admin")''')
+    cursor.execute('''INSERT usuarios(id,rol) VALUES(207767757,"alumno")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(267547511,"alumno")''')
     cursor.execute('''INSERT usuarios(id,rol) VALUES(686981968,"alumno")''')
     cursor.execute('''INSERT valoraciones(id,positivas,negativas) VALUES(0,0,0)''')
+    cursor.execute('''INSERT recordatorios(id_usuario, id_evento) VALUES("483048011", "206188845387")''')
+    cursor.execute('''INSERT recordatorios(id_usuario, id_evento) VALUES("207767757", "206188845387")''')
     conn.commit()
 
 def create_localizaciones(conn):
@@ -63,6 +59,7 @@ def create_localizaciones(conn):
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("H1.10", 524, 437)''')
     cursor.execute('''INSERT localizaciones(aula,ejex,ejey) VALUES("I2.35", 666, 583)''')
     conn.commit()
+    
 
 if __name__ == '__main__':
 
