@@ -9,13 +9,6 @@ def create_tables(conn):
         PRIMARY KEY (id)
         )''')
 
-    cursor.execute('''DROP TABLE IF EXISTS mensajes''')
-    cursor.execute('''CREATE TABLE mensajes(
-        id VARCHAR(255) NOT NULL,
-        mensaje VARCHAR(2048),
-        PRIMARY KEY (id)
-        )''')
-
     cursor.execute('''DROP TABLE IF EXISTS valoraciones''')
     cursor.execute('''CREATE TABLE valoraciones(
         id INT NOT NULL,

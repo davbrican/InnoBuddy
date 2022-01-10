@@ -54,8 +54,6 @@ jobs:
         python-version: ["3.9"]
     steps:
     - uses: actions/checkout@v2
-    - name: Shutdown Ubuntu MySQL (SUDO)
-      run: sudo service mysql stop
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
