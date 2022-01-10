@@ -13,7 +13,7 @@ def admin(update, context):
     is_admin = user_service.is_admin(update.message.chat_id)
 
     if len(context.args) == 0:
-        context.bot.send_message(update.message.chat_id, readMessage("ayuda_admin"))
+        context.bot.send_message(update.message.chat_id, readMessage("ayuda_admin"), parse_mode='MarkdownV2')
         return
 
     arg1 = context.args[0]
