@@ -1,0 +1,17 @@
+name: Deploy Innobuddy Python
+
+on:
+  workflow_run:
+    workflows: ["Innobuddy Python"]
+    branches: [master]
+    types: 
+      - completed
+jobs:
+  deploy:
+    steps:
+    - uses: actions/checkout@v1
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "innobuddy"
+          heroku_email: "dbrincau@us.es"
