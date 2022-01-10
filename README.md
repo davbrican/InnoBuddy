@@ -3,6 +3,7 @@ InnoBuddy es un bot de Telegram creado para ayudar a los participantes en las Jo
 
 ## Arquitectura
 El bot está creado en Python, comunicándose con una base de datos MySQL. Los credenciales y tokens necesarios deben situarse en un archivo .env en la raíz del proyecto. Se incluye un archivo template.env con ejemplos no funcionales de todos los secrets necesarios para que funcione el bot en su totalidad.
+Si se quiere desplegar en docker, además hay que añadir la variable MYSQL_ROOT_PASS (Contraseña del usuario root de la base de datos)
 
 ## Iniciar el bot
 La <b>primera</b> vez que queremos arrancar el bot, una vez tenemos un servicio MySQL, tenemos que popular la base de datos para crear tablas y datos de prueba. El script es el siguiente:
