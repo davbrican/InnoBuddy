@@ -19,6 +19,8 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 sys.path.append(os.path.dirname(currentdir))
 
 from services.mongodb_service import get_by_day
+from services.user_service import find_all_users
+from services.ratings_service import get_all_ratings
 
 
 load_dotenv()
@@ -252,6 +254,28 @@ async def test_admin_codigo_invalido(client: TelegramClient):
         time.sleep(5.0)
         
 @mark.asyncio
+async def test_admin_ayuda(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/admin")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['ayuda_admin']) in resp.raw_text.replace("\n\n","\n")
+        time.sleep(5.0)
+        
+@mark.asyncio
+async def test_admin_sin_privilegios(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        await conv.send_message("/admin mensaje-global hola")
+        f = open(os.path.dirname(__file__) + "/../commands/mensajes.json", "r", encoding="UTF-8")
+        messages = json.load(f)
+        f.close()
+        resp: Message = await conv.get_response()
+        assert markdown_to_text(messages['credenciales_erroneas']) in resp.raw_text.replace("\n\n","\n")
+        time.sleep(5.0)
+        
+@mark.asyncio
 async def test_admin_codigo_valido(client: TelegramClient):
     async with client.conversation(testbot_name, timeout=20) as conv:
         await conv.send_message("/admin upgrade " + codigo)
@@ -273,7 +297,22 @@ async def test_admin_codigo_ya_admin(client: TelegramClient):
         assert markdown_to_text(messages['ascenso_cumplido']) in resp.raw_text.replace("\n\n","\n").replace("<", "\\<")
         time.sleep(5.0)
         
-
+@mark.asyncio
+async def test_admin_estadisticas(client: TelegramClient):
+    async with client.conversation(testbot_name, timeout=20) as conv:
+        users = len(find_all_users())
+        ratings = get_all_ratings()
+        positive = ratings[0][1]
+        negative = ratings[0][2]
+        total = positive + negative
+        positive_percentage = round(positive / total  * 100,2) if total != 0 else 0
+        negative_percentage = round(negative / total * 100,2) if total != 0 else 0
+        await conv.send_message("/admin estadisticas")
+        resp = f'Un total de {users} usuarios distintos han utilizado el bot.\n\nValoraciones:\nPOSITIVAS: {positive_percentage}% ({positive})\nNEGATIVAS: {negative_percentage}% ({negative})'
+        resp2: Message = await conv.get_response()
+        assert resp in resp2.raw_text
+        time.sleep(5.0)
+        
         
 @mark.asyncio
 async def test_eventos_message(client: TelegramClient):
